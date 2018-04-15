@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/rectangle">
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   android:background="#009688"
+    android:padding="30dp"
+    android:id="@+id/mainbox">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nutella Pie"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/recipe_name" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50px"
+        android:layout_height="100px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="Right Arrow"
+        android:layout_marginEnd="16dp"
+        app:srcCompat="@drawable/arrow" />
+
+
+</RelativeLayout>
+
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@android:color/black"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Servings : 8"
+        android:id="@+id/recipe_servings"/>
+
+
+</LinearLayout>
