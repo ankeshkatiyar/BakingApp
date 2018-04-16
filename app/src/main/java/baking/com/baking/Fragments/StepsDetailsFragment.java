@@ -2,6 +2,9 @@ package baking.com.baking.Fragments;
 
 import android.content.Context;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +49,9 @@ import com.google.android.exoplayer2.upstream.FileDataSource.FileDataSourceExcep
 import com.google.android.exoplayer2.util.Util;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import baking.com.baking.R;
 
@@ -108,7 +114,8 @@ public class StepsDetailsFragment extends Fragment implements Player.EventListen
         }
         else {
             videoView.getVideoControls().hide();
-            videoView.setPreviewImage(R.drawable.novideo);
+            videoView.setPreviewImage(Uri.parse(thumbnailUrl));
+            //videoView.setPreviewImage(R.drawable.novideo);
         }
 
     }
@@ -154,7 +161,22 @@ public class StepsDetailsFragment extends Fragment implements Player.EventListen
             player.addListener(this);
             player.prepare(videoSource);
             playerView.requestFocus();
-            player.setPlayWhenReady(true);
+            player.setPlayWhenReady(false );
+            if(!thumbnailUrl.isEmpty()) {
+                Bitmap bmp = null;
+                try {
+                    URL url = new URL(thumbnailUrl);
+                    bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                } catch (MalformedURLException me) {
+                    me.printStackTrace();
+                } catch (IOException ie) {
+                    ie.printStackTrace();
+                }
+                BitmapDrawable background = new BitmapDrawable(getResources(), bmp);
+                playerView.setBackground(background);
+            }
+
+
         }
         else{
             playerView.removeAllViews();
@@ -217,4 +239,6 @@ public class StepsDetailsFragment extends Fragment implements Player.EventListen
     public void onSeekProcessed() {
 
     }
+
+
 }

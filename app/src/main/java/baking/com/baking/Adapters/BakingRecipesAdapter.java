@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
 
@@ -40,8 +40,21 @@ public class BakingRecipesAdapter extends RecyclerView.Adapter<BakingRecipesAdap
 
     @Override
     public void onBindViewHolder(BakingRecipeViewHolder holder, int position) {
-        holder.recipeNameTextView.setText(bakingModels.get(position).getRecipeName());
+
         holder.recipeServingsTextView.setText("Servings : " + Integer.toString(bakingModels.get(position).getServings()));
+       // String url = bakingModels.get(position).getImageURL();
+        String url = "https://www.gstatic.com/webp/gallery3/1.png";
+
+        if(!url.isEmpty()){
+            holder.recipeNameTextView.setVisibility(View.GONE);
+            holder.recipeName.setText(bakingModels.get(position).getRecipeName());
+            holder.recipeName.setVisibility(View.VISIBLE);
+            holder.imageView.setVisibility(View.VISIBLE);
+            Picasso.with(context).load(url).into(holder.imageView);
+        }
+        else{
+            holder.recipeNameTextView.setText(bakingModels.get(position).getRecipeName());
+        }
 
 
     }
@@ -66,6 +79,7 @@ public class BakingRecipesAdapter extends RecyclerView.Adapter<BakingRecipesAdap
         private final TextView recipeNameTextView;
         private final TextView recipeServingsTextView;
         private final ImageView imageView;
+        private final TextView recipeName;
 
         @Override
         public void onClick(View view) {
@@ -78,7 +92,8 @@ public class BakingRecipesAdapter extends RecyclerView.Adapter<BakingRecipesAdap
             super(itemView);
             recipeNameTextView = itemView.findViewById(R.id.recipe_name);
             recipeServingsTextView = itemView.findViewById(R.id.recipe_servings);
-            imageView = itemView.findViewById(R.id.imageView2);
+            imageView = itemView.findViewById(R.id.recipe_image);
+            recipeName = itemView.findViewById(R.id.recipe_name_1);
             itemView.setOnClickListener(this);
         }
     }

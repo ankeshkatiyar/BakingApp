@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import baking.com.baking.Adapters.BakingRecipesAdapter;
@@ -29,6 +30,8 @@ private Fragment mContent;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         if(savedInstanceState==null) {
 
             RecipesFragment recipesFragment = new RecipesFragment();
@@ -45,6 +48,13 @@ private Fragment mContent;
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         getSupportFragmentManager().putFragment(outState,"RecipesFragment",mContent);
+    }
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            finish();
+        }
     }
 }
 
